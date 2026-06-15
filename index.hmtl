@@ -17,50 +17,78 @@
 body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
 #map{flex:1;z-index:1}
 
-.search-bar{position:absolute;top:12px;left:12px;right:12px;z-index:1000;display:flex;flex-direction:column;gap:0}
+/* PLAN MODE UI */
+.search-bar{position:absolute;top:12px;left:12px;right:12px;z-index:1000;display:flex;flex-direction:column}
 .search-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 20px #0006}
 .search-row{display:flex;align-items:center;gap:6px;padding:4px 10px}
 .search-row+.search-row{border-top:1px solid var(--border)}
-.search-row .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .dot-a{background:var(--green)}.dot-b{background:var(--accent)}
 .search-row input{flex:1;background:none;border:none;color:var(--text);padding:10px 4px;font-size:14px;outline:none}
 .search-row input::placeholder{color:var(--muted)}
-.icon-btn{background:none;border:none;color:var(--muted);cursor:pointer;padding:6px;font-size:16px;line-height:1;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.icon-btn:hover{color:var(--text);background:var(--bg)}
-.icon-btn.loc:hover{color:var(--green);background:var(--green-dim)}
-.icon-btn.hide{display:none}
+.ib{background:none;border:none;color:var(--muted);cursor:pointer;padding:6px;font-size:16px;line-height:1;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ib:hover{color:var(--text);background:var(--bg)}
+.ib.loc:hover{color:var(--green);background:var(--green-dim)}
+.ib.hid{display:none}
 .sug-list{background:var(--panel);border:1px solid var(--border);border-radius:12px;margin-top:6px;max-height:240px;overflow-y:auto;display:none;box-shadow:0 4px 20px #0006}
 .sug-list.open{display:block}
-.sug-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border)}
-.sug-item:last-child{border-bottom:none}
-.sug-item:hover,.sug-item:active{background:var(--bg)}
-.sug-icon{font-size:14px;margin-top:1px;flex-shrink:0;color:var(--muted)}
-.sug-main{font-size:13px;line-height:1.35}.sug-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.si{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border)}
+.si:last-child{border-bottom:none}
+.si:hover,.si:active{background:var(--bg)}
+.si-i{font-size:14px;margin-top:1px;flex-shrink:0;color:var(--muted)}
+.si-m{font-size:13px;line-height:1.35}.si-s{font-size:11px;color:var(--muted);margin-top:1px}
 
 .bottom-panel{background:var(--panel);border-top:1px solid var(--border);padding:10px 14px;z-index:1000;display:flex;flex-direction:column;gap:8px}
-.action-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ar{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .pill{padding:7px 16px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
 .pill:hover{border-color:var(--muted)}
 .pill.on{background:var(--avoid);border-color:var(--avoid);color:#fff}
 .pill.go{background:var(--accent);border-color:var(--accent);color:#fff}
 .pill.go:disabled{opacity:.3;cursor:not-allowed}
 .pill.go:not(:disabled):hover{filter:brightness(1.15)}
+.pill.nav{background:var(--green);border-color:var(--green);color:#fff}
+.pill.nav:disabled{opacity:.3;cursor:not-allowed}
+.pill.exp{background:var(--route);border-color:var(--route);color:#fff}
+.pill.exp:disabled{opacity:.3;cursor:not-allowed}
 .chips{display:flex;gap:4px;flex-wrap:wrap}
 .chip{display:flex;align-items:center;gap:3px;background:var(--avoid-dim);border:1px solid var(--avoid);color:var(--avoid);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:500}
 .chip button{background:none;border:none;color:var(--avoid);cursor:pointer;font-size:13px;line-height:1;padding:0 1px}
 .stats{display:flex;gap:14px;font-size:12px;color:var(--muted)}
 .stats .v{color:var(--text);font-weight:700}
 
+/* NAV MODE UI */
+.nav-hud{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1500;pointer-events:none;display:none;flex-direction:column}
+.nav-hud.active{display:flex}
+.nav-top{pointer-events:all;background:var(--panel);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.nav-maneuver{font-size:22px;font-weight:700;line-height:1.2}
+.nav-road{font-size:13px;color:var(--muted)}
+.nav-dist{font-size:14px;color:var(--accent);font-weight:600}
+.nav-bottom{pointer-events:all;margin-top:auto;background:var(--panel);border-top:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:12px}
+.nav-eta{flex:1}
+.nav-eta .ne-dist{font-size:16px;font-weight:700}
+.nav-eta .ne-time{font-size:12px;color:var(--muted)}
+.nav-end{padding:10px 20px;border-radius:20px;background:var(--avoid);border:none;color:#fff;font-size:13px;font-weight:600;cursor:pointer}
+.nav-mute{padding:10px 14px;border-radius:20px;background:var(--border);border:none;color:var(--text);font-size:13px;cursor:pointer}
+
+/* Export modal */
+.modal-bg{position:fixed;inset:0;background:#000a;z-index:3000;display:none;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;width:min(320px,90vw);display:flex;flex-direction:column;gap:12px}
+.modal h3{font-size:15px;font-weight:700}
+.modal-btn{display:flex;align-items:center;gap:10px;padding:14px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:14px;text-align:left;text-decoration:none;width:100%}
+.modal-btn:hover{background:var(--bg);border-color:var(--muted)}
+.modal-btn .mb-icon{font-size:20px;flex-shrink:0}
+.modal-btn .mb-sub{font-size:11px;color:var(--muted)}
+.modal-close{align-self:center;padding:8px 20px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px}
+
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--border);color:var(--text);padding:7px 16px;border-radius:20px;font-size:12px;z-index:2000;opacity:0;transition:opacity .25s;pointer-events:none}
 .toast.show{opacity:1}
-
 .leaflet-container{background:var(--bg)!important}
 .mk{display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700;color:#fff;box-shadow:0 2px 8px #0008}
 .mk-a{background:var(--green);width:28px;height:28px;font-size:12px}
 .mk-b{background:var(--accent);width:28px;height:28px;font-size:12px}
 .mk-x{background:var(--avoid);width:22px;height:22px;font-size:13px}
-.mk-me{background:var(--route);width:12px;height:12px;border:2px solid #fff}
-
+.mk-me{width:16px;height:16px;background:var(--route);border:3px solid #fff;border-radius:50%;box-shadow:0 0 12px #3b82f688}
 .ctx{position:fixed;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:4px 0;z-index:3000;min-width:150px;box-shadow:0 8px 24px #000a}
 .ctx button{display:block;width:100%;text-align:left;background:none;border:none;color:var(--text);padding:9px 14px;font-size:13px;cursor:pointer}
 .ctx button:hover{background:var(--border)}
@@ -68,34 +96,73 @@ body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:v
 </style>
 </head>
 <body>
-
 <div id="map"></div>
 
-<div class="search-bar">
+<!-- PLAN UI -->
+<div class="search-bar" id="planSearch">
   <div class="search-card">
     <div class="search-row">
       <div class="dot dot-a"></div>
       <input id="inA" placeholder="Starting point" oninput="onType('a')" onfocus="onFocus('a')"/>
-      <button class="icon-btn hide" id="clrA" onclick="clrPt('a')">&times;</button>
-      <button class="icon-btn loc" onclick="useLoc('a')" title="My location">&#9678;</button>
+      <button class="ib hid" id="clrA" onclick="clrPt('a')">&times;</button>
+      <button class="ib loc" onclick="useLoc('a')" title="My location">&#9678;</button>
     </div>
     <div class="search-row">
       <div class="dot dot-b"></div>
       <input id="inB" placeholder="Destination" oninput="onType('b')" onfocus="onFocus('b')"/>
-      <button class="icon-btn hide" id="clrB" onclick="clrPt('b')">&times;</button>
+      <button class="ib hid" id="clrB" onclick="clrPt('b')">&times;</button>
     </div>
   </div>
   <div class="sug-list" id="sugBox"></div>
 </div>
 
-<div class="bottom-panel">
-  <div class="action-row">
+<div class="bottom-panel" id="planPanel">
+  <div class="ar">
     <button class="pill go" id="goBtn" onclick="calcRoute()" disabled>Route</button>
+    <button class="pill nav" id="navBtn" onclick="startNav()" disabled>Navigate</button>
+    <button class="pill exp" id="expBtn" onclick="openExport()" disabled>Export</button>
     <button class="pill" id="avBtn" onclick="togAvoid()">+ Avoid</button>
     <button class="pill" onclick="clearAll()">Clear</button>
   </div>
   <div class="chips" id="chipBox"></div>
   <div class="stats" id="statsBox"></div>
+</div>
+
+<!-- NAV HUD -->
+<div class="nav-hud" id="navHud">
+  <div class="nav-top">
+    <div class="nav-dist" id="navDist"></div>
+    <div class="nav-maneuver" id="navMan">Calculating...</div>
+    <div class="nav-road" id="navRoad"></div>
+  </div>
+  <div class="nav-bottom">
+    <div class="nav-eta">
+      <div class="ne-dist" id="navRemain"></div>
+      <div class="ne-time" id="navEta"></div>
+    </div>
+    <button class="nav-mute" id="muteBtn" onclick="togMute()">Mute</button>
+    <button class="nav-end" onclick="endNav()">End</button>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="modal-bg" id="exportModal">
+  <div class="modal">
+    <h3>Export Route</h3>
+    <a class="modal-btn" id="expGoogle" href="#" target="_blank">
+      <span class="mb-icon">&#127758;</span>
+      <div><div>Google Maps</div><div class="mb-sub">Opens with waypoints to preserve avoided roads</div></div>
+    </a>
+    <a class="modal-btn" id="expApple" href="#" target="_blank">
+      <span class="mb-icon">&#128506;</span>
+      <div><div>Apple Maps</div><div class="mb-sub">Start and destination (no waypoint support)</div></div>
+    </a>
+    <button class="modal-btn" id="expCopy" onclick="copyRouteLink()">
+      <span class="mb-icon">&#128203;</span>
+      <div><div>Copy Google Maps Link</div><div class="mb-sub">Paste into any app</div></div>
+    </button>
+    <button class="modal-close" onclick="closeExport()">Cancel</button>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -109,16 +176,19 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{att
 let ptA=null,ptB=null,mkA=null,mkB=null,mkMe=null;
 let avoids=[],routeLn=null,avoidOn=false;
 let gTimer=null,curSug='a',sugArr=[];
+let routeSteps=[],routeCoords=[],routeMeta=null;
+let navActive=false,navWatchId=null,navStepIdx=0,navMuted=false,wakeLock=null;
+let exportWaypoints=[];
 
 function ic(c,l){return L.divIcon({className:'',html:'<div class="mk '+c+'">'+l+'</div>',iconSize:c==='mk-me'?[16,16]:[28,28],iconAnchor:c==='mk-me'?[8,8]:[14,14]})}
 
-// Geolocation auto-start
+// Geolocation
 (function(){
   if(!navigator.geolocation)return;
   navigator.geolocation.getCurrentPosition(p=>{
     const la=p.coords.latitude,ln=p.coords.longitude;
     map.setView([la,ln],13);
-    mkMe=L.marker([la,ln],{icon:ic('mk-me',''),interactive:false}).addTo(map);
+    mkMe=L.marker([la,ln],{icon:ic('mk-me',''),interactive:false,zIndexOffset:999}).addTo(map);
     setPt('a',la,ln);
     revGeo(la,ln,n=>{document.getElementById('inA').value=n;showClr('a',true)});
   },()=>{},{enableHighAccuracy:true,timeout:8000});
@@ -150,125 +220,294 @@ function setPt(w,la,ln){
 function clrPt(w){
   if(w==='a'){ptA=null;if(mkA){map.removeLayer(mkA);mkA=null};document.getElementById('inA').value=''}
   else{ptB=null;if(mkB){map.removeLayer(mkB);mkB=null};document.getElementById('inB').value=''}
-  showClr(w,false);
-  if(routeLn){map.removeLayer(routeLn);routeLn=null;document.getElementById('statsBox').innerHTML=''}
-  updBtn();
+  showClr(w,false);clearRoute();updBtn();
 }
 
-function showClr(w,v){document.getElementById('clr'+w.toUpperCase()).classList.toggle('hide',!v)}
+function clearRoute(){
+  if(routeLn){map.removeLayer(routeLn);routeLn=null}
+  routeSteps=[];routeCoords=[];routeMeta=null;exportWaypoints=[];
+  document.getElementById('statsBox').innerHTML='';
+  document.getElementById('navBtn').disabled=true;
+  document.getElementById('expBtn').disabled=true;
+}
+
+function showClr(w,v){document.getElementById('clr'+w.toUpperCase()).classList.toggle('hid',!v)}
 function updBtn(){document.getElementById('goBtn').disabled=!(ptA&&ptB)}
 
 // Search
-function onType(w){
-  curSug=w;const v=document.getElementById('in'+w.toUpperCase()).value;
-  showClr(w,v.length>0);clearTimeout(gTimer);
-  if(v.length<3){closeSug();return}
-  gTimer=setTimeout(()=>geo(v),350);
-}
+function onType(w){curSug=w;const v=document.getElementById('in'+w.toUpperCase()).value;showClr(w,v.length>0);clearTimeout(gTimer);if(v.length<3){closeSug();return}gTimer=setTimeout(()=>geo(v),350)}
 function onFocus(w){curSug=w;if(sugArr.length)openSug()}
-
 function geo(q){
   fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(q)+'&format=json&limit=5&countrycodes=us')
     .then(r=>r.json()).then(res=>{
       sugArr=res;if(!res.length){closeSug();return}
-      const box=document.getElementById('sugBox');
-      box.innerHTML=res.map((r,i)=>{
+      document.getElementById('sugBox').innerHTML=res.map((r,i)=>{
         const p=r.display_name.split(',');
-        return '<div class="sug-item" onclick="pick('+i+')"><span class="sug-icon">&#128205;</span><div><div class="sug-main">'+p[0].trim()+'</div><div class="sug-sub">'+p.slice(1,4).join(',').trim()+'</div></div></div>';
-      }).join('');
-      openSug();
+        return '<div class="si" onclick="pick('+i+')"><span class="si-i">&#128205;</span><div><div class="si-m">'+p[0].trim()+'</div><div class="si-s">'+p.slice(1,4).join(',').trim()+'</div></div></div>';
+      }).join('');openSug();
     });
 }
-
 function pick(i){
   const r=sugArr[i],la=+r.lat,ln=+r.lon;
-  const nm=r.display_name.split(',').slice(0,3).join(',').trim();
-  const el=document.getElementById('in'+curSug.toUpperCase());
-  el.value=nm;showClr(curSug,true);closeSug();
-  setPt(curSug,la,ln);map.setView([la,ln],14);
-  const other=curSug==='a'?'B':'A';
-  if(!document.getElementById('in'+other).value)setTimeout(()=>document.getElementById('in'+other).focus(),120);
+  document.getElementById('in'+curSug.toUpperCase()).value=r.display_name.split(',').slice(0,3).join(',').trim();
+  showClr(curSug,true);closeSug();setPt(curSug,la,ln);map.setView([la,ln],14);
+  const o=curSug==='a'?'B':'A';
+  if(!document.getElementById('in'+o).value)setTimeout(()=>document.getElementById('in'+o).focus(),120);
 }
-
 function openSug(){document.getElementById('sugBox').classList.add('open')}
 function closeSug(){document.getElementById('sugBox').classList.remove('open');sugArr=[]}
-
 function revGeo(la,ln,cb){
   fetch('https://nominatim.openstreetmap.org/reverse?lat='+la+'&lon='+ln+'&format=json&zoom=17')
-    .then(r=>r.json()).then(d=>{cb(d.display_name?d.display_name.split(',').slice(0,3).join(',').trim():la.toFixed(4)+', '+ln.toFixed(4))})
-    .catch(()=>cb(la.toFixed(4)+', '+ln.toFixed(4)));
+    .then(r=>r.json()).then(d=>{cb(d.display_name?d.display_name.split(',').slice(0,3).join(',').trim():la.toFixed(4)+', '+ln.toFixed(4))}).catch(()=>cb(la.toFixed(4)+', '+ln.toFixed(4)));
 }
 
 // Avoid
 function togAvoid(){avoidOn=!avoidOn;document.getElementById('avBtn').classList.toggle('on',avoidOn);toast(avoidOn?'Tap map to mark areas to avoid':'Avoid mode off')}
-
 function addAv(la,ln){
   const ci=L.circle([la,ln],{radius:300,color:'#ef4444',fillColor:'#ef444433',fillOpacity:.4,weight:2}).addTo(map);
   const mk=L.marker([la,ln],{icon:ic('mk-x','X')}).addTo(map);
   const id=Date.now(),z={id,lat:la,lng:ln,name:'',ci,mk};
-  avoids.push(z);
-  revGeo(la,ln,n=>{z.name=n.split(',')[0].trim();renChips()});
-  mk.on('click',()=>remAv(id));renChips();
-  if(routeLn)calcRoute();
+  avoids.push(z);revGeo(la,ln,n=>{z.name=n.split(',')[0].trim();renChips()});
+  mk.on('click',()=>remAv(id));renChips();if(routeLn)calcRoute();
 }
-
 function remAv(id){
   const i=avoids.findIndex(z=>z.id===id);if(i<0)return;
-  map.removeLayer(avoids[i].ci);map.removeLayer(avoids[i].mk);
-  avoids.splice(i,1);renChips();if(routeLn)calcRoute();
+  map.removeLayer(avoids[i].ci);map.removeLayer(avoids[i].mk);avoids.splice(i,1);renChips();if(routeLn)calcRoute();
 }
+function renChips(){document.getElementById('chipBox').innerHTML=avoids.map(z=>'<div class="chip">'+(z.name||'...')+'<button onclick="remAv('+z.id+')">&times;</button></div>').join('')}
 
-function renChips(){
-  document.getElementById('chipBox').innerHTML=avoids.map(z=>'<div class="chip">'+
-    (z.name||'...')+'<button onclick="remAv('+z.id+')">&times;</button></div>').join('');
-}
-
-// Route
+// Routing
 function calcRoute(){
   if(!ptA||!ptB)return;toast('Routing...');
   let wp=avoids.length?detour(ptA,ptB,avoids):[];
+  exportWaypoints=wp;
   const c=[ptA,...wp,ptB].map(p=>p[1]+','+p[0]).join(';');
-  fetch('https://router.project-osrm.org/route/v1/driving/'+c+'?overview=full&geometries=geojson')
+  fetch('https://router.project-osrm.org/route/v1/driving/'+c+'?overview=full&geometries=geojson&steps=true')
     .then(r=>r.json()).then(d=>{
       if(d.code!=='Ok'){toast('Route failed');return}
       const rt=d.routes[0];
       if(routeLn)map.removeLayer(routeLn);
       routeLn=L.geoJSON(rt.geometry,{style:{color:'#3b82f6',weight:4,opacity:.85}}).addTo(map);
       map.fitBounds(routeLn.getBounds(),{padding:[80,80]});
+
+      // Extract steps
+      routeSteps=[];
+      rt.legs.forEach(leg=>{
+        leg.steps.forEach(s=>{
+          if(s.maneuver)routeSteps.push({
+            instruction:buildInstruction(s.maneuver,s.name),
+            road:s.name||'',
+            distance:s.distance,
+            duration:s.duration,
+            lat:s.maneuver.location[1],
+            lng:s.maneuver.location[0],
+            type:s.maneuver.type,
+            modifier:s.maneuver.modifier||''
+          });
+        });
+      });
+
+      routeCoords=rt.geometry.coordinates.map(c=>({lat:c[1],lng:c[0]}));
+      routeMeta={distance:rt.distance,duration:rt.duration};
+
       const mi=(rt.distance/1609.34).toFixed(1),dur=Math.round(rt.duration/60),h=Math.floor(dur/60),m=dur%60;
       document.getElementById('statsBox').innerHTML=
-        '<span><span class="v">'+mi+' mi</span></span>'+
-        '<span><span class="v">'+(h?h+'h ':'')+m+'m</span></span>'+
-        (avoids.length?'<span>Avoiding <span class="v">'+avoids.length+'</span> area'+(avoids.length>1?'s':'')+'</span>':'');
+        '<span><span class="v">'+mi+' mi</span></span><span><span class="v">'+(h?h+'h ':'')+m+'m</span></span>'+
+        (avoids.length?'<span>Avoiding <span class="v">'+avoids.length+'</span> area'+(avoids.length>1?'s':'')+'</span>':'')+
+        '<span class="v">'+routeSteps.length+' steps</span>';
+      document.getElementById('navBtn').disabled=false;
+      document.getElementById('expBtn').disabled=false;
     }).catch(()=>toast('Routing error'));
+}
+
+function buildInstruction(man,road){
+  const dir={'left':'Turn left','right':'Turn right','slight left':'Slight left','slight right':'Slight right',
+    'sharp left':'Sharp left','sharp right':'Sharp right','straight':'Continue straight','uturn':'Make a U-turn'};
+  const types={'depart':'Head out','arrive':'Arrive at destination','merge':'Merge','fork':'Take the fork',
+    'roundabout':'Enter roundabout','rotary':'Enter rotary','end of road':'At end of road'};
+  let txt='';
+  if(man.type==='turn'||man.type==='new name'||man.type==='end of road'){
+    txt=(dir[man.modifier]||'Continue');
+  }else{
+    txt=types[man.type]||(dir[man.modifier]||'Continue');
+  }
+  if(road)txt+=' onto '+road;
+  return txt;
 }
 
 function detour(s,e,zs){
   const wp=[];
   for(const z of zs){
-    const d=psd(z,s,e);
-    if(d<.01){const a=Math.atan2(z.lng-(s[1]+e[1])/2,z.lat-(s[0]+e[0])/2);
-      wp.push([z.lat+Math.cos(a+Math.PI/2)*.005,z.lng+Math.sin(a+Math.PI/2)*.005])}
-  }
-  return wp;
+    const d=psd(z,s,e);if(d<.01){
+      const a=Math.atan2(z.lng-(s[1]+e[1])/2,z.lat-(s[0]+e[0])/2);
+      wp.push([z.lat+Math.cos(a+Math.PI/2)*.005,z.lng+Math.sin(a+Math.PI/2)*.005]);
+    }
+  }return wp;
 }
 function psd(z,a,b){const dx=b[1]-a[1],dy=b[0]-a[0],l=Math.sqrt(dx*dx+dy*dy);if(!l)return Math.sqrt((z.lat-a[0])**2+(z.lng-a[1])**2);let t=((z.lng-a[1])*dx+(z.lat-a[0])*dy)/(l*l);t=Math.max(0,Math.min(1,t));return Math.sqrt((z.lat-(a[0]+t*dy))**2+(z.lng-(a[1]+t*dx))**2)}
 
-// Map clicks
+// =========== NAVIGATION MODE ===========
+async function startNav(){
+  if(!routeSteps.length){toast('Calculate a route first');return}
+  if(!navigator.geolocation){toast('Location required');return}
+
+  navActive=true;navStepIdx=0;navMuted=false;
+  document.getElementById('planSearch').style.display='none';
+  document.getElementById('planPanel').style.display='none';
+  document.getElementById('navHud').classList.add('active');
+  document.getElementById('muteBtn').textContent='Mute';
+
+  // Wake lock
+  try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen')}}catch(e){}
+
+  updateNavHud();
+  speak(routeSteps[0].instruction);
+
+  navWatchId=navigator.geolocation.watchPosition(onNavPos,
+    ()=>toast('GPS signal lost'),
+    {enableHighAccuracy:true,maximumAge:2000,timeout:10000}
+  );
+}
+
+function endNav(){
+  navActive=false;
+  if(navWatchId!==null){navigator.geolocation.clearWatch(navWatchId);navWatchId=null}
+  if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null}
+  speechSynthesis.cancel();
+  document.getElementById('navHud').classList.remove('active');
+  document.getElementById('planSearch').style.display='';
+  document.getElementById('planPanel').style.display='';
+}
+
+function onNavPos(pos){
+  const la=pos.coords.latitude,ln=pos.coords.longitude;
+  // Update blue dot
+  if(mkMe){mkMe.setLatLng([la,ln])}
+  else{mkMe=L.marker([la,ln],{icon:ic('mk-me',''),interactive:false,zIndexOffset:999}).addTo(map)}
+  map.setView([la,ln],16);
+
+  // Check step proximity
+  if(navStepIdx<routeSteps.length){
+    const s=routeSteps[navStepIdx];
+    const d=haversine(la,ln,s.lat,s.lng);
+    // Advance when within 40m
+    if(d<40&&navStepIdx<routeSteps.length-1){
+      navStepIdx++;
+      updateNavHud();
+      speak(routeSteps[navStepIdx].instruction);
+    }
+    // Pre-announce at 200m
+    if(d<200&&d>150&&navStepIdx<routeSteps.length-1){
+      const next=routeSteps[navStepIdx+1];
+      if(next)speak('In '+ Math.round(d)+' meters, '+next.instruction);
+    }
+    // Arrived
+    if(navStepIdx===routeSteps.length-1&&d<30){
+      speak('You have arrived at your destination');
+      setTimeout(endNav,3000);
+    }
+  }
+
+  // Update remaining distance
+  let rem=0;
+  for(let i=navStepIdx;i<routeSteps.length;i++)rem+=routeSteps[i].distance;
+  const mi=(rem/1609.34).toFixed(1);
+  const dur=Math.round(rem/((routeMeta.distance/routeMeta.duration)||13.4));
+  const h=Math.floor(dur/3600),m=Math.round((dur%3600)/60);
+  document.getElementById('navRemain').textContent=mi+' mi remaining';
+  document.getElementById('navEta').textContent=(h?h+'h ':'')+m+'m';
+}
+
+function updateNavHud(){
+  const s=routeSteps[navStepIdx];
+  if(!s)return;
+  const distFt=Math.round(s.distance*3.281);
+  const distStr=distFt>1000?(s.distance/1609.34).toFixed(1)+' mi':distFt+' ft';
+  document.getElementById('navDist').textContent=distStr;
+  document.getElementById('navMan').textContent=s.instruction;
+  document.getElementById('navRoad').textContent=s.road?'on '+s.road:'';
+}
+
+function speak(text){
+  if(navMuted||!('speechSynthesis' in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.rate=1.0;u.pitch=1.0;u.volume=1.0;
+  speechSynthesis.speak(u);
+}
+
+function togMute(){
+  navMuted=!navMuted;
+  document.getElementById('muteBtn').textContent=navMuted?'Unmute':'Mute';
+  if(navMuted)speechSynthesis.cancel();
+  toast(navMuted?'Voice muted':'Voice on');
+}
+
+function haversine(la1,ln1,la2,ln2){
+  const R=6371000,dLa=(la2-la1)*Math.PI/180,dLn=(ln2-ln1)*Math.PI/180;
+  const a=Math.sin(dLa/2)**2+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLn/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+// =========== EXPORT ===========
+function openExport(){
+  if(!ptA||!ptB||!routeSteps.length){toast('Route first');return}
+  // Build Google Maps URL with waypoints
+  const wps=getExportWaypoints();
+  let gUrl='https://www.google.com/maps/dir/'+ptA[0]+','+ptA[1];
+  wps.forEach(w=>{gUrl+='/'+w[0]+','+w[1]});
+  gUrl+='/'+ptB[0]+','+ptB[1];
+
+  const aUrl='https://maps.apple.com/?saddr='+ptA[0]+','+ptA[1]+'&daddr='+ptB[0]+','+ptB[1]+'&dirflg=d';
+
+  document.getElementById('expGoogle').href=gUrl;
+  document.getElementById('expApple').href=aUrl;
+  document.getElementById('expCopy').dataset.url=gUrl;
+  document.getElementById('exportModal').classList.add('open');
+}
+
+function getExportWaypoints(){
+  // Sample key waypoints from route to preserve shape around avoid zones
+  // Use the detour waypoints plus sample every ~15% of the route
+  const wp=[...exportWaypoints];
+  if(routeCoords.length>10){
+    const step=Math.floor(routeCoords.length/6);
+    for(let i=step;i<routeCoords.length-step;i+=step){
+      const c=routeCoords[i];
+      wp.push([c.lat,c.lng]);
+    }
+  }
+  // Google Maps allows up to 9 waypoints via URL, keep under that
+  if(wp.length>8){
+    const sampled=[];
+    const step=wp.length/8;
+    for(let i=0;i<8;i++)sampled.push(wp[Math.floor(i*step)]);
+    return sampled;
+  }
+  return wp;
+}
+
+function copyRouteLink(){
+  const url=document.getElementById('expCopy').dataset.url;
+  navigator.clipboard.writeText(url).then(()=>{toast('Link copied');closeExport()}).catch(()=>toast('Copy failed'));
+}
+
+function closeExport(){document.getElementById('exportModal').classList.remove('open')}
+
+// Map interactions
 map.on('click',e=>{
   hideCtx();closeSug();
+  if(navActive)return;
   if(avoidOn){addAv(e.latlng.lat,e.latlng.lng);return}
   if(!ptA){setPt('a',e.latlng.lat,e.latlng.lng);revGeo(e.latlng.lat,e.latlng.lng,n=>{document.getElementById('inA').value=n;showClr('a',true)});return}
   if(!ptB){setPt('b',e.latlng.lat,e.latlng.lng);revGeo(e.latlng.lat,e.latlng.lng,n=>{document.getElementById('inB').value=n;showClr('b',true)});return}
 });
-
 map.on('contextmenu',e=>{
+  if(navActive)return;
   e.originalEvent.preventDefault();const m=document.getElementById('ctx');
   m.innerHTML='<div class="cl">Set as</div><button onclick="ctxP(\'a\','+e.latlng.lat+','+e.latlng.lng+')">Start</button><button onclick="ctxP(\'b\','+e.latlng.lat+','+e.latlng.lng+')">Destination</button><div class="cl">Mark</div><button onclick="ctxA('+e.latlng.lat+','+e.latlng.lng+')">Avoid here</button>';
-  m.style.left=Math.min(e.originalEvent.clientX,innerWidth-160)+'px';
-  m.style.top=Math.min(e.originalEvent.clientY,innerHeight-140)+'px';m.style.display='block';
+  m.style.left=Math.min(e.originalEvent.clientX,innerWidth-160)+'px';m.style.top=Math.min(e.originalEvent.clientY,innerHeight-140)+'px';m.style.display='block';
 });
-
 function ctxP(w,la,ln){hideCtx();setPt(w,la,ln);revGeo(la,ln,n=>{document.getElementById('in'+w.toUpperCase()).value=n;showClr(w,true)})}
 function ctxA(la,ln){hideCtx();addAv(la,ln)}
 function hideCtx(){document.getElementById('ctx').style.display='none'}
@@ -276,13 +515,12 @@ function hideCtx(){document.getElementById('ctx').style.display='none'}
 function clearAll(){
   clrPt('a');clrPt('b');
   avoids.forEach(z=>{map.removeLayer(z.ci);map.removeLayer(z.mk)});
-  avoids=[];renChips();document.getElementById('statsBox').innerHTML='';
+  avoids=[];renChips();clearRoute();
   avoidOn=false;document.getElementById('avBtn').classList.remove('on');
 }
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
-
-document.addEventListener('click',e=>{if(!e.target.closest('.ctx'))hideCtx();if(!e.target.closest('.search-bar'))closeSug()});
+document.addEventListener('click',e=>{if(!e.target.closest('.ctx'))hideCtx();if(!e.target.closest('.search-bar'))closeSug();if(e.target.classList.contains('modal-bg'))closeExport()});
 </script>
 </body>
 </html>
